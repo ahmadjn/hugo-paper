@@ -11,6 +11,7 @@
       {{ end }}
     </p>
     <h1>{{ .Title }}</h1>
+    <center>{{- partial "ads/iklan-bawah-title.html" . }}</center>
   </header>
   <section class="post-content">{{ .Content }}</section>
 
@@ -24,7 +25,8 @@
   {{ end }}
 
   <!-- Post Nav -->
-  {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}<!---->
+  {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  <!---->
   {{ if and (gt (len $pages) 1) (in $pages . ) }}
   <nav class="post-nav">
     {{ with $pages.Next . }}

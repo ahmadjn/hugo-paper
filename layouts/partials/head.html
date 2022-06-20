@@ -2,6 +2,13 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  {{- if hugo.IsProduction | or (eq .Site.Params.env "production") }}
+  {{ partialCached "ads/arsae-client.html" . }}
+  {{ partialCached "ads/iklan-auto.html" . }}
+  <meta name="robots" content="index, follow">
+  {{- else }}
+  <meta name="robots" content="noindex, nofollow">
+  {{- end }}
 
   <!-- Title -->
   <title>{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ site.Title }}</title>
@@ -25,51 +32,19 @@
 
   {{ if and .IsPage (not site.Params.disableHLJS) }}
   <link rel="preload stylesheet" as="style" href="{{ `an-old-hope.min.css` | absURL }}" />
-  <script
-    defer
-    src="{{ `highlight.min.js` | absURL }}"
-    onload="hljs.initHighlightingOnLoad();"
-  ></script>
+  <script defer src="{{ `highlight.min.js` | absURL }}" onload="hljs.initHighlightingOnLoad();"></script>
   {{ end }}
 
   <!-- Preload -->
   <link rel="preload" as="image" href="{{ `theme.png` | absURL }}" />
 
-  {{ range $.Scratch.Get "social-list" }}
-  <link rel="preload" as="image" href="{{ printf `%s.svg` . | absURL }}" />
-  {{ end }}
-
   <!-- Favicon -->
   <link rel="icon" href="{{ `favicon.ico` | absURL }}" />
   <link rel="apple-touch-icon" href="{{ `apple-touch-icon.png` | absURL }}" />
 
-  <!-- Generator -->
-  {{ hugo.Generator }}
-
   <!-- RSS -->
   {{ range .AlternativeOutputFormats }}
-  <link
-    rel="{{ .Rel }}"
-    type="{{ .MediaType.Type }}"
-    href="{{ .Permalink }}"
-    title="{{ site.Title }}"
-  />
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
   {{ end }}
 
-  <!-- Misc -->
-  {{ if or hugo.IsProduction (eq site.Params.env "production") }}
-  <!---->
-  {{ template "_internal/google_analytics_async.html" . }}
-  <!---->
-  {{ template "_internal/google_analytics.html" . }}
-  <!---->
-  {{ template "_internal/google_news.html" . }}
-  <!---->
-  {{ template "_internal/opengraph.html" . }}
-  <!---->
-  {{ template "_internal/schema.html" . }}
-  <!---->
-  {{ template "_internal/twitter_cards.html" . }}
-  <!---->
-  {{ end }}
 </head>

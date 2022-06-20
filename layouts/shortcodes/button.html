@@ -1,0 +1,31 @@
+<style>
+    .btn {
+        background: #4E92DF;
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #4E92DF);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #4E92DF);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #4E92DF);
+        background-image: -o-linear-gradient(top, #3cb0fd, #4E92DF);
+        background-image: linear-gradient(to bottom, #3cb0fd, #4E92DF);
+        text-decoration: none;
+    }
+</style>
+<div style="text-align: center">
+    <a href="{{.Get 1}}">
+        <div class="btn">
+            {{.Get 0}}
+        </div>
+    </a>
+</div>
